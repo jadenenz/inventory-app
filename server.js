@@ -5,6 +5,8 @@ const app = express()
 const cors = require("cors")
 
 const matchaRouter = require("./routes/matchaRoute")
+const producerRouter = require("./routes/producerRoute")
+const gradeRouter = require("./routes/gradeRoute")
 
 //Set up a mongoDB connection
 const mongoose = require("mongoose")
@@ -28,6 +30,8 @@ app.use(express.json())
 //enable all cors requests
 app.use(cors())
 app.use("/matcha/", matchaRouter)
+app.use("/producers/", producerRouter)
+app.use("/grades/", gradeRouter)
 
 app.listen(3001, () => {
   console.log("server running on port 3001")

@@ -7,7 +7,7 @@ const MatchaSchema = new Schema({
   producer: { type: Schema.Types.ObjectId, ref: "Producer", required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
-  grade: { type: String, required: true },
+  grade: { type: Schema.Types.ObjectId, ref: "Grade", required: true },
   stock: { type: Number, required: true },
 })
 

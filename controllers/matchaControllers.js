@@ -27,6 +27,7 @@ exports.matcha_list = (req, res, next) => {
 exports.matcha_detail = (req, res, next) => {
   Matcha.findById(req.params.id)
     .populate("producer")
+    .populate("grade")
     .exec(function (err, matcha_detail) {
       if (err) {
         return next(err)
@@ -60,6 +61,7 @@ exports.matcha_create_get = (req, res, next) => {
   ]
 }
 
+// POST form data to create new matcha
 exports.matcha_create_post = [
   //Validate and sanitize fields.
   body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
