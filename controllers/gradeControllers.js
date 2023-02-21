@@ -43,3 +43,33 @@ exports.grade_detail = (req, res, next) => {
     }
   )
 }
+
+exports.grade_create_post = [
+  //Validate and sanitize fields.
+  body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
+
+  //Process request after validation and sanititation.
+  (req, res, next) => {
+    //Extract the validation errors from a request.
+    const errors = validationResult(req)
+
+    //Create Grade object with escaped and trimmed data
+    const grade = new Grade({
+      name: req.body.name,
+      description: req.body.description,
+    })
+    if (!errors.isEmpty()) {
+      //Need to implement error handling differently than express templating did
+      res.send(`Errors with form ${errors.array}`)
+    }
+
+    //Data from form is valid. Save matcha.
+    grade.save((err) => {
+      if (err) {
+        return next(err)
+      }
+      // Successful: so send success code. (FIGURE OUT HOW TO REDIRECT W/ NEXT.JS)
+      res.status(201).send("Succesfully created resource")
+    })
+  },
+]

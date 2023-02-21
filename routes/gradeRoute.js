@@ -6,7 +6,7 @@ const gradeRoute = require("../controllers/gradeControllers")
 router.get("/", gradeRoute.grades_list)
 
 // POST request for creating grade
-// router.post("/create", gradeRoute.grade_create_post)
+router.post("/create", gradeRoute.grade_create_post)
 
 // GET request for individual grade, dynamic based on objectId
 router.get("/:id", gradeRoute.grade_detail)
